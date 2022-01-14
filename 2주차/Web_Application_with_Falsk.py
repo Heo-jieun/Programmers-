@@ -13,9 +13,11 @@ menus = [
 def hello_flask():
     return "Helow World!"
 
+count = 3
 # GET / menus -> 자료를 가지고 온다.
 @app.route('/menus') # menus라는 자료에 접근하는 주소 / methods = ['GET']이 디폴트
 def get_menus() :
+
 
     # 딕셔너리는 json으로 바꿔줄 수 없어서 menus를 value로 하는 새로운 딕셔너리를 만들어줌
     return jsonify({"menus" : menus}) # jsonify : json화 해서 바꿔줌
@@ -26,8 +28,10 @@ def create_menu() :
     # 전달받은 자료를 menus 자원에 추가
     # request가 JSON이라고 가정
     request_data = request.get_json()
+    global count
+    count += 1
     new_menu = {
-        "id" : 4,
+        "id" : count,
         "name" : request_data['name'],
         "price" : request_data['price']
     }
